@@ -48,7 +48,7 @@ minstall(){
     wget --no-check-certificate https://www.yiluzhuanqian.com/soft/linux/yilu_19.11.1.tgz -O /opt/yilu.tgz
     tar zxf /opt/yilu.tgz -C /opt/
 
-    /opt/yilu/mservice -user_id $uid -reg_device -dev_name $hname
+    proxychains4 /opt/yilu/mservice -user_id $uid -reg_device -dev_name $hname
 
     # uninstall old service
     set +e
@@ -66,7 +66,7 @@ if [[ "${distro,,}" = *"ubuntu"* ]] || [[ "${distro,,}" = *"debian"* ]];then
     minstall
     # start
     # service YiluzhuanqianSer restart
-	proxychains4 /opt/yilu/mservice
+    proxychains4 /opt/yilu/mservice
     # start with system boot
     # sudo crontab -l -u root 2>/dev/null | grep -q -F 'service YiluzhuanqianSer start' || (sudo crontab -l -u root 2>/dev/null;echo "* * * * * pidof mservice || service YiluzhuanqianSer start") | sudo crontab -u root -
 elif [[ "${distro,,}" = *"centos"* ]] || [[ "${distro,,}" = *"redhat"* ]];then
